@@ -1,1 +1,4 @@
-console.log("hello")
+console.log("hello,world")
+const div=document.createElement('div')
+div.innerText='hi'
+document.body.appendChild(div)
