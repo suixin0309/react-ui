@@ -38,7 +38,7 @@
     "noUnusedLocals": true,
     "skipLibCheck": true      //跳过所有声明（.d.ts）文件的类型检查
   },
-  "include": [
+  "include": [   //声明源文件
     "example.tsx",
     "lib/**/*",
     "include/**/*",
