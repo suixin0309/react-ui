@@ -1,9 +1,11 @@
-import * as React from 'react'
+import * as React from 'react';
+
 function Button() {
-    return(
+    return (
         <div>
             button
         </div>
-    )
+    );
 }
-export default Button
+
+export default Button;

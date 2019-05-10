@@ -33,8 +33,10 @@
     "noImplicitAny": true,
     "importHelpers": true,
     "strictNullChecks": true,
-    "allowSyntheticDefaultImports": true,
-    "noUnusedLocals": true
+//    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "noUnusedLocals": true,
+    "skipLibCheck": true      //跳过所有声明（.d.ts）文件的类型检查
   },
   "include": [
     "example.tsx",
