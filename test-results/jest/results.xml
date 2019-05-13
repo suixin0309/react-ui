@@ -14,5 +14,10 @@
     <testcase classname="classes test xx" name="classes test xx" time="0">
     </testcase>
   </testsuite>
-
+  <testsuite name="icon用例" errors="0" failures="0" skipped="0" timestamp="2019-05-13T08:26:17" time="1.419" tests="2">
+    <testcase classname="icon用例 render successfully" name="icon用例 render successfully" time="0.016">
+    </testcase>
+    <testcase classname="icon用例 onClick" name="icon用例 onClick" time="0.042">
+    </testcase>
+  </testsuite>
 </testsuites>
