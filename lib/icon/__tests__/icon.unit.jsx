@@ -4,7 +4,7 @@ import {mount} from 'enzyme'
 import Icon from "../icon"
 
 describe('icon用例', () => {
-    it('是div', () => {
+    it('render successfully', () => {
         const json = renderer.create(<Icon name='alipay'/>).toJSON()
         expect(json).toMatchSnapshot()
     });
