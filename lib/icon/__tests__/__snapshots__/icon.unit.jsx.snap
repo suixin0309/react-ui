@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`icon用例 是div 1`] = `
+exports[`icon用例 render successfully 1`] = `
 <svg
   className="sui-icon"
 >
