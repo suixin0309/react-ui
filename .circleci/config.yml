@@ -47,9 +47,9 @@ jobs:
   publish:
     <<: *defaults
     steps:
-      -attach_workspace:
+      - attach_workspace:
         at: .
-      -run: npm publish
+      - run: npm publish
 
 
 workflows:
@@ -63,6 +63,6 @@ workflows:
       - test:
           requires:
             - prepare
-      -publish:
+      - publish:
         requires:
-          -build
+          - build
