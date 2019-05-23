@@ -1,0 +1,19 @@
+[class^=sui-] {
+  box-sizing: border-box;
+  font-size: 14px;
+  &::after,&::before{
+    box-sizing: border-box;
+  }
+}
+button{
+  box-sizing: border-box;
+  height: 32px;
+  border-radius: 8px;
+  margin: 0 4px;
+  &:first-child{
+    margin-left: 0;
+  }
+  &:last-child{
+    margin-right: 0;
+  }
+}
