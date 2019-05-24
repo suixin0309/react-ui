@@ -1,0 +1,22 @@
+@import "../helper";
+
+.x{
+  background:#4285f4;
+  margin: 4px 0;
+  color: #fff;
+}
+.y{
+  background: lighten(#4285f4,5%);
+  margin: 4px 0;
+  color: #fff;
+
+}
+.z{
+  width: 100px;
+  background: darken(#4285f4,30%);
+  margin: 4px 0;
+  color: #fff;
+}
+.z+ .y, .y+ .z,.z+ .sui-layout{
+  margin-left: 8px;
+}
