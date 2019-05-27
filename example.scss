@@ -12,6 +12,9 @@ h1, h2, h3, h4, h5, h6 {font-weight: normal}
 ul,ol,li{
   list-style: none;
 }
+pre{
+  font-family: 'Fira Code Retina','Consolas','monospace';
+}
 a{
   text-decoration: navajowhite;
   color:inherit;
@@ -70,4 +73,7 @@ $border-color:#EEEEEE;
   color: #666;
   padding: 12px 0;
   border-top: 1px solid $border-color;
+}
+.example{
+  padding: $padding 0;
 }
