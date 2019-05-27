@@ -15,6 +15,7 @@ ul,ol,li{
 a{
   text-decoration: navajowhite;
   color:inherit;
+  display: block;
 }
 $padding:16px;
 $main-color:#3D3170;
@@ -47,13 +48,17 @@ $border-color:#EEEEEE;
   margin-right: 16px;
   h2{padding: $padding;font-size: 18px}
   ul{
-    padding: 0 $padding;
     min-width: 12em;
     li{
-      padding: 8px 0;
       a{
-        color:$main-color;
+        padding: 8px $padding;
+        color:#6560CF;
         font-weight: 600;
+        &:hover{color: $main-color}
+        &.active{
+          color: #fff;
+          background: lighten(#6560CF,1%);
+        }
       }
     }
   }
