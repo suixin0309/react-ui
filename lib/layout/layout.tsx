@@ -3,7 +3,6 @@ import './layout.scss';
 import {scopedClassMaker} from '../helpers/classnames';
 import {ReactElement} from 'react';
 import Aside from './aside';
-
 const sc = scopedClassMaker('sui-layout');
 
 interface Props extends React.HTMLAttributes<HTMLElement> {
@@ -25,3 +24,8 @@ const Layout: React.FunctionComponent<Props> = (props) => {
 
 };
 export default Layout;
+export {Layout};
+export {default as Content} from './content'
+export {default as Header} from './header'
+export {default as Aside} from './aside'
+export {default as Footer} from './footer'
