@@ -12,7 +12,7 @@ const FormDemo: React.FunctionComponent = () => {
             <h3>代码演示</h3>
 
             <div>
-                <Demo explanation='用户填写必须的信息以注册新用户' code={require('!!raw-loader!./form.example.tsx').default}>
+                <Demo caption='注册新用户' explanation='用户填写必须的信息以注册新用户' code={require('!!raw-loader!./form.example.tsx').default}>
                     <FormExample />
                 </Demo>
             </div>
