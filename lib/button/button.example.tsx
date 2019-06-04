@@ -1,9 +1,10 @@
 import * as React from 'react';
+import Button from './button';
 
 const ButtonExample:React.FunctionComponent=()=> {
     return (
         <div>
-            button
+            <Button level='normal' type='submit'></Button>
         </div>
     );
 }

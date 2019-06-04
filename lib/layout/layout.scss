@@ -1,19 +1,23 @@
 //@import "../helper";
-
-.sui-layout{
+.sui-layout {
   display: flex;
   flex-direction: column;
-
-  &-content{
+  &-content {
     flex-grow: 1;
   }
-  & &{
+  & & {
     flex-grow: 1;
     flex-direction: row;
   }
-  &-hasAside{
+  &-hasAside {
     flex-direction: row;
-    .sui-layout{
+    .sui-layout {
+      flex-direction: column;
+    }
+  }
+  & & &-hasAside {
+    flex-direction: row;
+    .sui-layout {
       flex-direction: column;
     }
   }

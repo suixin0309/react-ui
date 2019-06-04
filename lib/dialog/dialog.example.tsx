@@ -11,6 +11,8 @@ function DialogExample() {
     return(
         <div>
             <div>
+                <h2>Example 1</h2>
+
                 <button onClick={()=>setX(!x)}>Dialog</button>
                 <Dialog visible={x} buttons={
                     [
@@ -22,6 +24,7 @@ function DialogExample() {
                 </Dialog>
             </div>
             <div>
+                <h2>Example 2</h2>
                 <button onClick={()=>setY(!y)}>Dialog</button>
                 <Dialog visible={y} buttons={
                     [
