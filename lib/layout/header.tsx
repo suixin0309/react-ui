@@ -4,7 +4,6 @@ import classes, {scopedClassMaker} from '../helpers/classnames';
 const sc=scopedClassMaker('sui-layout')
 
 interface Props extends React.HTMLAttributes<HTMLElement>{
-    contnet?: any
 }
 
 const Header: React.FunctionComponent<Props> = (props) => {

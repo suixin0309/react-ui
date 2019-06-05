@@ -6,7 +6,7 @@ import DialogExample2 from './dialog.example.2';
 import DialogExample4 from './dialog.example.4';
 
 import './dialog.example.scss'
-function DialogExample() {
+function DialogDemo() {
     return (
         <div className='demo'>
             <h2>弹出框组件 API</h2>
@@ -83,4 +83,4 @@ function DialogExample() {
     );
 }
 
-export default DialogExample;
+export default DialogDemo;

@@ -1,0 +1,13 @@
+.icon{
+  &-example ul{
+    & li{
+      width: 50px;
+      margin: 10px;
+      text-align: center;
+      display: inline-block;
+    }
+  }
+  &{
+    margin: 10px;
+  }
+}

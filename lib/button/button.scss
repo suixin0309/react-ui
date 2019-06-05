@@ -10,7 +10,7 @@
   }
   &-normal {
     border: 1px solid $border-color;
-    color: #333;
+    color: #666;
     background: #fff;
     &:hover, &:focus {
       border-color: $main-color;
@@ -24,6 +24,16 @@
     &:hover, &:focus {
       background: lighten($main-color, 10%);
       border-color: lighten($main-color, 10%);
+    }
+  }
+  &-danger {
+    border: 1px solid $warn-color;
+    color: $warn-color;
+    background: #fff;
+    &:hover, &:focus {
+      background: lighten($warn-color, 10%);
+      border-color: lighten($warn-color, 10%);
+      color: #fff;
     }
   }
 }
