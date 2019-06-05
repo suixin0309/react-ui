@@ -4,6 +4,6 @@ yarn doc
 git checkout gh-pages
 mv -f doc/* ./
 git add .
-git commit -m "update2"
+git commit -m "doc3"
 git push
 git checkout -
