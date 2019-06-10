@@ -1,7 +1,7 @@
 import * as React from 'react';
 import '../index.scss';
 import './dialog.scss';
-import {Fragment, ReactElement, ReactNode} from 'react';
+import { ReactElement, ReactNode} from 'react';
 import * as ReactDOM from 'react-dom';
 import Icon from '../icon/icon';
 import {scopedClassMaker} from '../helpers/classnames';
@@ -27,7 +27,7 @@ const Dialog: React.FunctionComponent<Props> = (props) => {
     };
     const x =
         props.visible ?
-            <Fragment>
+            <div>
                 <div className={sc('mask')} onClick={onClickMask}></div>
                 <div className={sc('')}>
                     <header className={sc('header')}>提示</header>
@@ -41,7 +41,7 @@ const Dialog: React.FunctionComponent<Props> = (props) => {
                         {props.buttons && props.buttons.map((button, index) => React.cloneElement(button, {key: index}))}
                     </footer>
                 </div>
-            </Fragment> :
+            </div> :
             <div></div>;
     return (
         ReactDOM.createPortal(x, document.body)
