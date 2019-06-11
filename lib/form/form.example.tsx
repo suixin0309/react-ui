@@ -6,13 +6,13 @@ import Button from '../button/button';
 import './form.example.scss';
 
 const usernames = ['frank', 'jack', 'jack', 'frankfrank', 'alice', 'bob'];
-const checkUserName = (username: string, succeed: (res: string) => any, fail: (rej: string) => any) => {
+const checkUserName = (username: string, succeed: () => any, fail: () => any) => {
     setTimeout(() => {
         if (usernames.indexOf(username) >= 0) {
-            succeed('fail');
+            fail()
             //return false
         } else {
-            succeed('succeed');
+            succeed()
             //return true
         }
     }, 3000);
@@ -27,33 +27,31 @@ const FormExample: React.FunctionComponent = () => {
         {name: 'password', label: '密码', input: {type: 'password'}},
     ]);
     const [errors, setErrors] = useState({});
-
-    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        const rules = [
-            {key: 'userName', required: true},
-            {key: 'userName', minLength: 2, maxLength: 5},
-            {key: 'userName', pattern: /^[A-Za-z0-9]+$/},
-            {
-                key: 'userName', validator: {
-                    name: 'unique',
-                    validate(username: string) {
-                        return new Promise<any>((resolve, reject) => {
-                            checkUserName(username, resolve, reject);
-                        });
-                    }
-                }
-            },
-            {key: 'password', required: true, pattern: /^[A-Za-z0-9]+$/}
-        ];
-        Validator(formData, rules, (errors) => {
-            setErrors(errors);
-            if (noError(errors)) {
-
-            }
+    const validator = (username: string) => {
+        return new Promise<string>((resolve, reject) => {
+            checkUserName(username, resolve, ()=>reject('unique'));
         });
-
-
     };
+    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+            const rules = [
+                {key: 'userName', required: true},
+                {key: 'userName', minLength: 2, maxLength: 5},
+                {key: 'userName', pattern: /^[A-Za-z0-9]+$/},
+                {
+                    key: 'userName', validator
+                },
+                {key: 'password', required: true, pattern: /^[A-Za-z0-9]+$/}
+            ];
+            Validator(formData, rules, (errors) => {
+                setErrors(errors);
+                if (noError(errors)) {
+
+                }
+            });
+
+
+        }
+    ;
     const transformError = (message: string) => {
         const map: any = {
             unique: 'username is taken',

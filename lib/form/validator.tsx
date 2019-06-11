@@ -6,10 +6,7 @@ interface FormRule {
     minLength?: number;
     maxLength?: number;
     pattern?: RegExp;
-    validator?: {
-        name: string;
-        validate: (value: string) => Promise<any>
-    }
+    validator?: (value: string) => Promise<string>
 }
 
 type FormRules = Array<FormRule>
@@ -26,10 +23,7 @@ export function noError(errors: any) {
     return Object.values(errors).length === 0;
 }
 
-interface OneError {
-    message: string;
-    promise?: Promise<void>
-}
+type OneError = string | Promise<string>
 
 const Validator = (formValue: FormValue, rules: FormRules, callback: (errors: any) => void): void => {
     let errors: any = {};
@@ -42,42 +36,42 @@ const Validator = (formValue: FormValue, rules: FormRules, callback: (errors: an
     rules.map(async rule => {
         const value = formValue[rule.key];
         if (rule.required && isEmpty(value)) {
-            addError(rule.key, {message: 'required'});
+            addError(rule.key, 'required');
         }
         if (rule.minLength && !isEmpty(value) && value.length < rule.minLength) {
-            addError(rule.key, {message: 'minLength'});
+            addError(rule.key, 'minLength');
         }
         if (rule.maxLength && !isEmpty(value) && value.length > rule.maxLength) {
-            addError(rule.key, {message: 'maxLength'});
+            addError(rule.key, 'maxLength');
         }
         if (rule.pattern && !isEmpty(value) && !(rule.pattern.test(value))) {
-            addError(rule.key, {message: 'pattern'});
+            addError(rule.key, 'pattern');
         }
         if (rule.validator) {
-            const promise = rule.validator.validate(value);
-            const name = rule.validator.name;
-            const key = rule.key;
-            addError(key, {message: name, promise});
+            const promise = rule.validator(value);
+            addError(rule.key, promise);
         }
     });
-    Promise.all(
-        flat(Object.values(errors))
-            .filter(item => item.promise)
-            .map(item => item.promise)
-    ).finally(() => {
-        callback(
-            fromEntries(
-                Object.keys(errors)
-                    .map<[string, string[]]>(key =>
-                        [key, errors[key].map((item: OneError) => item.message)]
-                    ))
-        );
+    const flattenErrors = flat(
+        Object.keys(errors).map(key =>
+        errors[key].map((promise: Promise<string>) => [key, promise])
+    ));
+    console.log(flattenErrors);
+    console.log('flattenErrors');
+    const newPromises = flattenErrors.map(([key, promiseOrString]) => (
+        promiseOrString instanceof Promise ? promiseOrString : Promise.reject(promiseOrString)
+    ).then(() => [key, undefined], (reason: string) =>[key, reason]));
+    console.log(newPromises);
+    console.log('newPromises');
+    Promise.all(newPromises).then((res:Array<[string,string]>) => {
+        callback(zip(res.filter(item => item[1])));
     });
+
 };
 export default Validator;
 
-function flat(array: Array<any>) {
-    const result = [];
+function flat(array: Array<[any]>) {
+    const result= [];
     for (let i = 0; i < array.length; i++) {
         if (array[i] instanceof Array) {
             result.push(...array[i]);
@@ -85,13 +79,25 @@ function flat(array: Array<any>) {
             result.push(array[i]);
         }
     }
+
     return result;
 }
 
-function fromEntries(array: Array<[string, string[]]>) {
-    const result: { [key: string]: string[] } = {};
-    for (let i = 0; i < array.length; i++) {
-        result[array[i][0]] = array[i][1];
-    }
+//kvList=['username':'p1'],['username':'p2'],...]
+function zip(kvList: Array<[string, string]>) {
+    const result:{[k:string]:[string]} = {};
+    kvList.map(([key, value]) => {
+        result[key] = result[key] || [];
+        result[key].push(value);
+    });
     return result;
 }
+
+//
+// function fromEntries(array: Array<[string, string[]]>) {
+//     const result: { [key: string]: string[] } = {};
+//     for (let i = 0; i < array.length; i++) {
+//         result[array[i][0]] = array[i][1];
+//     }
+//     return result;
+// }
