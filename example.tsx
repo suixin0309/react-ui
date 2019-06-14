@@ -9,6 +9,7 @@ import {Layout, Header, Aside, Content, Footer} from './lib/layout/layout';
 import './example.scss'
 import IconDemo from './lib/icon/icon.demo';
 import FormExample from './lib/form/form.demo';
+import ScrollExample from './lib/scroll/scroll.example';
 // const x=require('!!raw-loader!./lib/icon/icon.example.tsx')
 // console.log(x.default)
 const logo=require('./logo.png')
@@ -40,6 +41,9 @@ ReactDOM.render(
                         <li>
                             <NavLink to='/form'>表单</NavLink>
                         </li>
+                        <li>
+                            <NavLink to='/scroll'>滚动条</NavLink>
+                        </li>
                     </ul>
                 </Aside>
                 <Content className='site-main'>
@@ -49,6 +53,7 @@ ReactDOM.render(
                         <Route path='/dialog' component={DialogDemo}></Route>
                         <Route path='/layout' component={LayoutDemo}></Route>
                         <Route path='/form' component={FormExample}></Route>
+                        <Route path='/scroll' component={ScrollExample}></Route>
                     </main>
                 </Content>
 

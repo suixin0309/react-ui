@@ -1,0 +1,15 @@
+@import "../../helper";
+
+.sui-scroll{
+  position: relative;
+  overflow: hidden;
+  &-inner{
+    overflow: scroll;
+    border: 1px solid blue;
+    position: absolute;
+    top:0;
+    left: 0;
+    bottom: 0;
+    right: -14px;
+  }
+}

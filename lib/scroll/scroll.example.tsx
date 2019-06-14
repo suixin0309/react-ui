@@ -1,0 +1,38 @@
+import * as React from 'react';
+import Scroll from './scroll';
+
+const ScrollExample: React.FunctionComponent = () => {
+    return (
+        <div>
+            <div>
+                <h2>Scroll</h2>
+                <Scroll style={{height:200,border:'1px solid red'}}>
+                    <ul>
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li>6</li>
+                        <li>7</li>
+                        <li>8</li>
+                        <li>9</li>
+                        <li>10</li>
+                        <li>11</li>
+                        <li>12</li>
+                        <li>13</li>
+                        <li>14</li>
+                        <li>15</li>
+                        <li>16</li>
+                        <li>17</li>
+                        <li>18</li>
+                        <li>19</li>
+                        <li>20</li>
+                    </ul>
+                </Scroll>
+
+            </div>
+        </div>
+    );
+};
+export default ScrollExample;
