@@ -4,7 +4,7 @@
   position: relative;
   overflow: hidden;
   &-inner{
-    overflow: scroll;
+    overflow-y: scroll;
     border: 1px solid blue;
     position: absolute;
     top:0;
