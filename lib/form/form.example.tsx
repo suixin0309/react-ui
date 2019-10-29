@@ -43,6 +43,7 @@ const FormExample: React.FunctionComponent = () => {
                 {key: 'password', required: true, pattern: /^[A-Za-z0-9]+$/}
             ];
             Validator(formData, rules, (errors) => {
+                console.log(errors);
                 setErrors(errors);
                 if (noError(errors)) {
 
