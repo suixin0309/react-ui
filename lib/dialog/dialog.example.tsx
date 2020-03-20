@@ -1,12 +1,15 @@
 import * as React from 'react'
 import {useState} from 'react';
-import Dialog,{alert,confirm,modal} from './dialog';
+import Dialog,{alert,confirm,modal,tooltip} from './dialog';
 
 function DialogExample() {
     const [x,setX]=useState(false)
     const [y,setY]=useState(false)
     const openModal=()=>{
-        const close=modal(<h1>Modal <button onClick={()=>close()}>取消</button></h1>)
+        modal(<h1>Modal <button onClick={()=>close()}>取消</button></h1>)
+    }
+    const openTooltip=()=>{
+        tooltip(<h1>tooltip </h1>)
     }
     return(
         <div>
@@ -47,6 +50,10 @@ function DialogExample() {
             <div>
                 <h2>Example 4 </h2>
                 <button onClick={()=>openModal()}>Dialog modal</button>
+            </div>
+            <div>
+                <h2>Example 5 </h2>
+                <button onClick={()=>openTooltip()}>tooltip</button>
             </div>
         </div>
     )

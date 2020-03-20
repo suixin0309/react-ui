@@ -114,21 +114,25 @@ $border-color:#EEEEEE;
     width:100%;
     height:36px;
     line-height:36px;
+    display: flex;
+    align-items: center;
     & .line{
-      display:inline-block;
+      // display:inline-block;
       border-top:1px solid #cccccc;
       vertical-align:5px;
     }
     & .line:first-child{
       width:2%;
+      // flex: 1;
     }
     & .line:last-child{
-      width:90%;
+      flex: 1;
     }
     & .text{
       display:inline-block;
-      width:8%;
-      text-align: center;
+      // width:8%;
+      padding: 0 20px;
+      text-align: left;
     }
   }
   &-code{

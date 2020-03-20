@@ -4,6 +4,7 @@ import DialogExample1 from './dialog.example.1';
 import DialogExample3 from './dialog.example.3';
 import DialogExample2 from './dialog.example.2';
 import DialogExample4 from './dialog.example.4';
+import DialogExample5 from './dialog.example.5';
 
 import './dialog.example.scss'
 function DialogDemo() {
@@ -76,6 +77,12 @@ function DialogDemo() {
                 <Demo caption='自定义模态框' explanation='默认弹出框'
                       code={require('!!raw-loader!./dialog.example.4.tsx').default}>
                     <DialogExample4/>
+                </Demo>
+            </div>
+            <div>
+                <Demo caption='文字提示' explanation='tooltip'
+                      code={require('!!raw-loader!./dialog.example.5.tsx').default}>
+                    <DialogExample5/>
                 </Demo>
             </div>
 

@@ -84,6 +84,38 @@ const confirm = (content: string, yes?: () => void, no?: () => void) => {
     ];
     const close = modal(content, buttons, no);
 };
-export {alert, confirm, modal};
+// const tooltip = (content: string, yes?: () => void, no?: () => void) => {
+//     modal(content);
+//     // setTimeout(function(){
+//     //     close;
+//     // },3000)
+// };
+const tooltip = (content: ReactNode, time: Number=3000) => {
+    const close = () => {
+        ReactDOM.render(React.cloneElement(compontent), div);
+        ReactDOM.unmountComponentAtNode(div);
+        div.remove();
+
+    };
+    // const compontent = <div>{content}</div>;
+    
+    const compontent = <div>
+    <div className={sc('mask')}></div>
+    <div className={sc('')}>
+        <main className={sc('main')}>
+            {content}
+        </main>
+    </div>
+</div>;
+    const div = document.createElement('div');
+    const tooltipdom=ReactDOM.createPortal(compontent, document.body)
+    ReactDOM.render(tooltipdom, div);
+    setTimeout(function(){
+        close()
+    },1000)
+    // clearTimeout(timerId)
+    // return compontent;
+};
+export {alert, confirm, modal, tooltip};
 export default Dialog;
 ;

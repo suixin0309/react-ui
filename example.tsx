@@ -10,6 +10,8 @@ import './example.scss'
 import IconDemo from './lib/icon/icon.demo';
 import FormExample from './lib/form/form.demo';
 import ScrollExample from './lib/scroll/scroll.example';
+import TableExample from './lib/table/table.demo';
+
 // const x=require('!!raw-loader!./lib/icon/icon.example.tsx')
 // console.log(x.default)
 const logo=require('./logo.png')
@@ -44,6 +46,9 @@ ReactDOM.render(
                         <li>
                             <NavLink to='/scroll'>滚动条</NavLink>
                         </li>
+                        <li>
+                            <NavLink to='/table'>table</NavLink>
+                        </li>
                     </ul>
                 </Aside>
                 <Content className='site-main'>
@@ -54,6 +59,7 @@ ReactDOM.render(
                         <Route path='/layout' component={LayoutDemo}></Route>
                         <Route path='/form' component={FormExample}></Route>
                         <Route path='/scroll' component={ScrollExample}></Route>
+                        <Route path='/table' component={TableExample}></Route>
                     </main>
                 </Content>
 

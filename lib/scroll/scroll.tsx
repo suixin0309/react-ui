@@ -10,8 +10,8 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 
 }
 
-const isTouchDevice = 'ontouchstart' in document.documentElement;
-
+// const isTouchDevice = 'ontouchstart' in document.documentElement;
+// console.log(isTouchDevice);
 const Scroll: React.FunctionComponent<Props> = (props) => {
 
     const {children, ...rest} = props;
@@ -55,16 +55,20 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
         draggingRef.current = true;
         fristYRef.current = e.clientY;
         fristBarTopRef.current = barTop;
+        console.log(1212);
     };
     const onMouseMoveBar = (e: MouseEvent) => {
         if (draggingRef.current) {
+            console.log(34);
             const delta = e.clientY - fristYRef.current;
             const newBarTop = delta + fristBarTopRef.current;
             setBarTop(newBarTop);
+            // setTouchTranslate(newBarTop * scrollHeight / viewHeight)
             barRef.current!.scrollTop = newBarTop * scrollHeight / viewHeight;
         }
     };
     const onMouseUpBar = () => {
+        console.log(barRef.current!.scrollTop);
         draggingRef.current = false;
     };
     const onSelect = (e: Event) => {
@@ -107,7 +111,10 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
     return (
         <div className='sui-scroll' {...rest}>
             <div className='sui-scroll-inner'
-                 style={{right: -scrollbarWidth(), transform: `translateY(${touchTranslate}px)`}}
+                 style={{
+                     right: -scrollbarWidth(),
+                     transform: `translateY(${touchTranslate}px)`
+                 }}
                  onScroll={onScroll}
                  onTouchStart={onTouchStart}
                  onTouchMove={onTouchMove}
@@ -117,13 +124,11 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
                 {children}
 
             </div>
-            {!isTouchDevice &&
             <div className='sui-scroll-track'>
               <div className='sui-scroll-bar' style={{height: barHeight, transform: `translateY(${barTop}px)`}}
                    onMouseDown={onMousedownBar}
               ></div>
             </div>
-            }
 
         </div>
     );
