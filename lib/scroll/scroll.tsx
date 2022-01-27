@@ -5,36 +5,51 @@ import scrollbarWidth from './scrollbar-width';
 import {UIEventHandler} from 'react';
 import {MouseEventHandler} from 'react';
 import {TouchEventHandler} from 'react';
+import classes from '../helpers/classnames';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
 
 }
 
-// const isTouchDevice = 'ontouchstart' in document.documentElement;
-// console.log(isTouchDevice);
+const isTouchDevice = !('ontouchstart' in document.documentElement);
+console.log(isTouchDevice);
 const Scroll: React.FunctionComponent<Props> = (props) => {
-
     const {children, ...rest} = props;
     const [barHeight, setBarHeight] = useState(0);
+    const [barVisible,setBarVisible] = useState(false);
     const [barTop, _setBarTop] = useState(0);
-    const [scrollHeight, setScrollHeight] = useState(0);
-    const [viewHeight, setViewHeight] = useState(0);
+    // const [scrollHeight, setScrollHeight] = useState(0);
+    // const [viewHeight, setViewHeight] = useState(0);
     const barRef = useRef<HTMLDivElement>(null);
     const setBarTop = (number: number) => {
         if (number < 0) {return;}
+        const viewHeight=barRef.current!.getBoundingClientRect().height;
+        const scrollHeight=barRef.current!.scrollHeight;
         const maxBarTop = (scrollHeight - viewHeight) * viewHeight / scrollHeight;
         if (number > maxBarTop) {return;}
         _setBarTop(number);
     };
-
+    let timerIdRef=useRef<number|null>(null)
     const onScroll: UIEventHandler = (e) => {
+        setBarVisible(true)
+        const viewHeight=barRef.current!.getBoundingClientRect().height;
+        const scrollHeight=barRef.current!.scrollHeight;
         const scrollTop = e.currentTarget.scrollTop;   //34
         setBarHeight(viewHeight * viewHeight / scrollHeight);
         setBarTop(scrollTop * viewHeight / scrollHeight);
+        if(timerIdRef!=null){
+            clearTimeout(timerIdRef.current!)
+        }
+        timerIdRef.current=window.setTimeout(() => {
+            setBarVisible(false)
+        }, 500);
     };
+    useEffect(()=>{
+        console.log(barVisible);
+    },[barVisible])
     useEffect(() => {
-        setScrollHeight(barRef.current!.scrollHeight);
-        setViewHeight(barRef.current!.clientHeight);
+        // setScrollHeight(barRef.current!.scrollHeight);
+        // setViewHeight(barRef.current!.clientHeight);
         const scrollHeight = barRef.current!.scrollHeight; //400
         const viewHeight = barRef.current!.clientHeight;  //200
         setBarHeight(viewHeight * viewHeight / scrollHeight);
@@ -59,12 +74,14 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
     };
     const onMouseMoveBar = (e: MouseEvent) => {
         if (draggingRef.current) {
-            console.log(34);
             const delta = e.clientY - fristYRef.current;
             const newBarTop = delta + fristBarTopRef.current;
             setBarTop(newBarTop);
             // setTouchTranslate(newBarTop * scrollHeight / viewHeight)
-            barRef.current!.scrollTop = newBarTop * scrollHeight / viewHeight;
+            const vv=barRef.current!.getBoundingClientRect().height;
+            const ss=barRef.current!.scrollHeight;
+            // barRef.current!.scrollTop = newBarTop * scrollHeight / viewHeight;
+            barRef.current!.scrollTop = newBarTop * ss / vv;
         }
     };
     const onMouseUpBar = () => {
@@ -113,7 +130,7 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
             <div className='sui-scroll-inner'
                  style={{
                      right: -scrollbarWidth(),
-                     transform: `translateY(${touchTranslate}px)`
+                     transform: `translateY(${touchTranslate}px)`,
                  }}
                  onScroll={onScroll}
                  onTouchStart={onTouchStart}
@@ -124,8 +141,9 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
                 {children}
 
             </div>
-            <div className='sui-scroll-track'>
-              <div className='sui-scroll-bar' style={{height: barHeight, transform: `translateY(${barTop}px)`}}
+            <div className={classes('sui-scroll-track',`${barVisible?'':'sui-scroll-fadeout'}`)}>
+              <div className='sui-scroll-bar'
+               style={{height: barHeight, transform: `translateY(${barTop}px)`}}
                    onMouseDown={onMousedownBar}
               ></div>
             </div>

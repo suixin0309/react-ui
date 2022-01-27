@@ -9,6 +9,10 @@
     top:0;
     left: 0;
     bottom: 0;
+    border:1px solid red;
+    &::-webkit-scrollbar{
+      display: none;
+    }
   }
   &-track{
     width:12px;
@@ -26,5 +30,9 @@
     right: 2px;
     bottom: 0;
     background:rgba(128,128,128,0.8)
+  }
+  &-fadeout{
+    transition: all 1.5s; 
+    opacity: 0;
   }
 }
