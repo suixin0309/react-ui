@@ -8,7 +8,8 @@ module.exports = Object.assign({},base,{
     plugins: [
         new HtmlWebpackPlugin({
             title: "Sui",
-            template: "example.html"
+            template: "example.html",
+            // favicon:require('./logo.png')
         })
     ]
 })

@@ -42,7 +42,7 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
         }
         timerIdRef.current=window.setTimeout(() => {
             setBarVisible(false)
-        }, 500);
+        }, 300);
     };
     useEffect(()=>{
         console.log(barVisible);
@@ -97,10 +97,12 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
         else if (y > 50) y = 50;
         _setTouchTranslate(y);
     };
-    const pullingRef = useRef(false);
+    const pullingRef = useRef(false);//上拉刷新 进行中
     const lastYRef = useRef(0);
     const moveCountRef = useRef(0);
     const onTouchStart: TouchEventHandler = (e) => {
+        console.log(e.touches);
+        
         const scrollTop = barRef.current!.scrollTop;
         if (scrollTop !== 0) {return;}
         pullingRef.current = true;
@@ -108,21 +110,22 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
         moveCountRef.current = 0;
     };
     const onTouchMove: TouchEventHandler = (e) => {
-        const deltaY = e.touches[0].clientY - lastYRef.current;
+        const deltaY = e.touches[0].clientY - lastYRef.current;//>0 下移 看上面，<0看下面
         moveCountRef.current +=1;
         if (moveCountRef.current === 1 && deltaY < 0) {
             pullingRef.current = false;
             return;
         }
         if (!pullingRef.current) {return;}
-
         setTouchTranslate(touchTranslate + deltaY);
         lastYRef.current=e.touches[0].clientY;
 
     };
     const onTouchEnd: TouchEventHandler = (e) => {
-
+        setTimeout(() => {
         setTouchTranslate(0)
+            
+        }, 500);
     };
 
     return (
@@ -139,13 +142,15 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
                  ref={barRef}
             >
                 {children}
-
             </div>
             <div className={classes('sui-scroll-track',`${barVisible?'':'sui-scroll-fadeout'}`)}>
               <div className='sui-scroll-bar'
                style={{height: barHeight, transform: `translateY(${barTop}px)`}}
                    onMouseDown={onMousedownBar}
               ></div>
+            </div>
+            <div className='sui-scroll-pulling' style={{height:touchTranslate}}>
+                ⬇️
             </div>
 
         </div>
